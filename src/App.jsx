@@ -29,6 +29,7 @@ const lightTheme = createTheme({
     info:{
       main: "#c9430f",
     },
+    
     grey: {
       100: "#f6f6f6",
       300: "#DDDDDD", 

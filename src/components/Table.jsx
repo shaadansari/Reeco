@@ -1,3 +1,4 @@
+import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -14,6 +15,7 @@ import Typography from "@mui/material/Typography";
 import apple from "../assets/apple.png";
 import avocado from "../assets/Avocado.jpg";
 import StatusChips from "./StatusChips";
+import MissingDialog from "./MissingDialog";
 
 function createData(img, name, calories, fat, carbs, protein) {
   return { img, name, calories, fat, carbs, protein };
@@ -50,6 +52,16 @@ const rows = [
 
 export default function Tables() {
   const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <Box
       sx={{
@@ -110,6 +122,7 @@ export default function Tables() {
                       sx={{ color: theme.palette.grey[500], cursor: "pointer" }}
                     />
                     <ClearIcon
+                      onClick={handleClickOpen}
                       sx={{ color: theme.palette.grey[500], cursor: "pointer" }}
                     />
                     <Typography sx={{ color: theme.palette.grey[500] }}>
@@ -123,6 +136,7 @@ export default function Tables() {
           </TableBody>
         </Table>
       </TableContainer>
+      {open && <MissingDialog open={open} handleClose={handleClose} />}
     </Box>
   );
 }
