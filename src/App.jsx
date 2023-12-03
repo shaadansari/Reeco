@@ -22,7 +22,8 @@ const lightTheme = createTheme({
     },
     grey: {
       100: "#f6f6f6",
-      300: "#DDDDDD", // surface/secondary-default
+      300: "#DDDDDD", 
+      500: "#a5a5a5", // surface/secondary-default
     },
     action: {
       hover: "#EBF3FB", // card/primary-hover
