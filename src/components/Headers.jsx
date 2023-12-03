@@ -33,7 +33,7 @@ function Headers() {
     </Link>,
   ];
   return (
-    <Paper elevation={5} sx={{ borderRadius: "0px", padding: "20px 20px 0px 40px" }}>
+    <Paper elevation={3} sx={{ borderRadius: "0px", padding: "20px 20px 0px 40px" }}>
       <Breadcrumbs
         separator={<NavigateNextIcon fontSize="small" />}
         aria-label="breadcrumb"
@@ -41,7 +41,7 @@ function Headers() {
         {breadcrumbs}
       </Breadcrumbs>
       <Box sx={{display:"flex", justifyContent:"space-between", alignItems:"center", padding:"20px 10px 10px 0px"}}>
-        <Typography variant="h5" component="h2">
+        <Typography variant="h5" component="h2" fontWeight={600}>
           Orders 32457ABC
         </Typography>
         <Button sx={{marginLeft:"auto", marginRight:"10px", borderRadius:"50px"}} variant="outlined" color="secondary">

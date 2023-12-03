@@ -41,7 +41,7 @@ function NavBar() {
     <AppBar position="static" color="secondary">
       <Toolbar variant="dense">
         <Box sx={{ display: { xs: "none", md: "flex" }, mr: 2 }}>
-          <img src={reeco} alt="reeco" width="90px" height="25px" />
+          <img src={reeco} alt="reeco" width="70px" height="20px" />
         </Box>
 
         <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -82,7 +82,7 @@ function NavBar() {
         </Box>
 
         <Box sx={{ mr: 2, display: { xs: "flex", md: "none" }, flexGrow: 1 }}>
-          <img src={reeco} alt="reeco" width="90px" height="25px" />
+          <img src={reeco} alt="reeco" width="70px" height="20px" />
         </Box>
         <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
           {pages.map((page) => (
