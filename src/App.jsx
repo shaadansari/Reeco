@@ -20,6 +20,15 @@ const lightTheme = createTheme({
       main: "#06662e", // surface/surface-brand
       // dark: "#294E95", // deeptone/deepBlue  primary button
     },
+    success:{
+      main: "#06662e",
+    },
+    warning:{
+      main: "#b60523",
+    },
+    info:{
+      main: "#c9430f",
+    },
     grey: {
       100: "#f6f6f6",
       300: "#DDDDDD", 

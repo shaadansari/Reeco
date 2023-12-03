@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 
 import apple from "../assets/apple.png";
 import avocado from "../assets/Avocado.jpg";
+import StatusChips from "./StatusChips";
 
 function createData(img, name, calories, fat, carbs, protein) {
   return { img, name, calories, fat, carbs, protein };
@@ -94,7 +95,9 @@ export default function Tables() {
                 <TableCell>{row.fat}</TableCell>
                 <TableCell>{row.carbs}</TableCell>
                 <TableCell>{row.protein}</TableCell>
-                <TableCell>-</TableCell>
+                <TableCell>
+                  <StatusChips />
+                </TableCell>
                 <TableCell>
                   <Box
                     sx={{
@@ -103,9 +106,16 @@ export default function Tables() {
                       alignItems: "center",
                     }}
                   >
-                    <DoneIcon sx={{color:theme.palette.grey[500], cursor:"pointer"}} />
-                    <ClearIcon sx={{color:theme.palette.grey[500], cursor:"pointer"}} />
-                    <Typography sx={{color:theme.palette.grey[500]}}> Edit</Typography>
+                    <DoneIcon
+                      sx={{ color: theme.palette.grey[500], cursor: "pointer" }}
+                    />
+                    <ClearIcon
+                      sx={{ color: theme.palette.grey[500], cursor: "pointer" }}
+                    />
+                    <Typography sx={{ color: theme.palette.grey[500] }}>
+                      {" "}
+                      Edit
+                    </Typography>
                   </Box>
                 </TableCell>
               </TableRow>
