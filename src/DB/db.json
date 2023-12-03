@@ -9,6 +9,10 @@
       "id": 2,
       "name": "Jane Smith",
       "age": 40
+    },
+    {
+      "check": "update",
+      "id": 3
     }
   ]
 }
