@@ -44,11 +44,11 @@ function Headers() {
         <Typography variant="h5" component="h2">
           Orders 32457ABC
         </Typography>
-        <Button sx={{marginLeft:"auto", marginRight:"10px"}} variant="outlined" color="secondary">
-          Outlined
+        <Button sx={{marginLeft:"auto", marginRight:"10px", borderRadius:"50px"}} variant="outlined" color="secondary">
+          Back
         </Button>
-        <Button variant="contained" color="secondary">
-          Outlined
+        <Button sx={{ borderRadius:"50px"}} variant="contained" color="secondary">
+          Approve Order
         </Button>
       </Box>
     </Paper>
