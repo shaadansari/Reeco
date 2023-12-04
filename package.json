@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "start": "json-server --watch db.json --port https://your-site-name.netlify.app/orderData"
+    "start": "json-server --watch db.json --port https://reecassingment.netlify.app/orderData"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
