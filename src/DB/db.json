@@ -6,7 +6,7 @@
       "price": "$60.67 / 6+1LB",
       "productName": "Fred",
       "quantity": "0 x 6 *1LB",
-      "status": "warning",
+      "status": "",
       "total": "0",
       "image": "apple"
     },
@@ -16,7 +16,7 @@
       "price": "$45.99 / 4+1LB",
       "productName": "Alice",
       "quantity": "2 x 4 *1LB",
-      "status": "success",
+      "status": "",
       "total": "91.98",
       "image": "avocado"
     },
@@ -26,7 +26,7 @@
       "price": "$35.50 / 3+1LB",
       "productName": "Bob",
       "quantity": "5 x 3 *1LB",
-      "status": "info",
+      "status": "",
       "total": "177.50",
       "image": "apple"
     },
@@ -36,7 +36,7 @@
       "price": "$75.25 / 5+1LB",
       "productName": "Eve",
       "quantity": "3 x 5 *1LB",
-      "status": "success",
+      "status": "",
       "total": "225.75",
       "image": "avocado"
     },
@@ -46,7 +46,7 @@
       "price": "$30.00 / 2+1LB",
       "productName": "Charlie",
       "quantity": "1 x 2 *1LB",
-      "status": "info",
+      "status": "",
       "total": "30.00",
       "image": "avocado"
     }

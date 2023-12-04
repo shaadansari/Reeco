@@ -8,7 +8,6 @@ import Box from "@mui/material/Box";
 
 function handleClick(event) {
   event.preventDefault();
-  console.info("You clicked a breadcrumb.");
 }
 
 function Headers() {

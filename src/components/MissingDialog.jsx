@@ -11,8 +11,7 @@ import { useTheme } from "@emotion/react";
 
 // eslint-disable-next-line react/prop-types
 export default function MissingDialog({ open, handleClose, selectedRow }) {
-    const theme = useTheme();
-    console.log(selectedRow)
+  const theme = useTheme();
 
   return (
     <React.Fragment>
@@ -22,19 +21,39 @@ export default function MissingDialog({ open, handleClose, selectedRow }) {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle sx={{display:"flex", justifyContent:"space-between", alignItems:"center"}} id="alert-dialog-title">
+        <DialogTitle
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+          id="alert-dialog-title"
+        >
           {"Missing Product"}
-          <ClearIcon sx={{cursor:"pointer", color:theme.palette.grey[500]}} onClick={handleClose} />
+          <ClearIcon
+            sx={{ cursor: "pointer", color: theme.palette.grey[500] }}
+            onClick={handleClose}
+          />
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             {`is ${selectedRow?.productName} urgent ?`}
-           
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="text" color="info"  onClick={() => handleClose(false)}>No</Button>
-          <Button variant="text" color="warning" onClick={() => handleClose(true)} autoFocus>
+          <Button
+            variant="text"
+            color="info"
+            onClick={() => handleClose(false)}
+          >
+            No
+          </Button>
+          <Button
+            variant="text"
+            color="warning"
+            onClick={() => handleClose(true)}
+            autoFocus
+          >
             Yes
           </Button>
         </DialogActions>

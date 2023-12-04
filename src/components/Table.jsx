@@ -13,13 +13,12 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Typography from "@mui/material/Typography";
 
 import { useDispatch, useSelector } from "react-redux";
+import { fetchData, postData } from "../store/dataSlice";
 
 import apple from "../assets/apple.png";
 import avocado from "../assets/Avocado.jpg";
 import StatusChips from "./StatusChips";
 import MissingDialog from "./MissingDialog";
-
-import { fetchData, postData } from "../store/dataSlice";
 
 const images = { apple, avocado };
 const colors = { success: "#06662e", warning: "#b60523", info: "#c9430f" };
@@ -31,22 +30,10 @@ export default function Tables() {
   const [selectedRow, setSelectedRow] = React.useState({});
   const data = useSelector((state) => state.data);
 
-  console.log(data);
-
   React.useEffect(() => {
-    console.log("run");
     dispatch(fetchData());
-    // dispatch(
-    //   postData({
-    //     endPoint: 1,
-
-    //     body: {
-    //       firstName: "Fred",
-    //       lastName: "Flintstone",
-    //     },
-    //   })
-    // );
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleClickOpen = (row) => {
     setSelectedRow(row);
@@ -98,7 +85,6 @@ export default function Tables() {
       <TableContainer
         component={Paper}
         sx={{
-          // minWidth: 650,
           border: `1px solid ${theme.palette.grey[300]}`,
           width: { xs: "100%", md: "80%" },
         }}
@@ -107,7 +93,6 @@ export default function Tables() {
           <TableHead>
             <TableRow>
               <TableCell width={"20px"}></TableCell>
-
               <TableCell width={"150px"}>Product Name</TableCell>
               <TableCell>Brand</TableCell>
               <TableCell>Price</TableCell>
@@ -149,7 +134,6 @@ export default function Tables() {
                       }}
                     >
                       <DoneIcon
-                        // color={row.status}
                         sx={{
                           color:
                             row.status === "success"
