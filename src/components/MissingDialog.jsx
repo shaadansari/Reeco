@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
@@ -9,8 +10,10 @@ import ClearIcon from "@mui/icons-material/Clear";
 import { useTheme } from "@emotion/react";
 
 // eslint-disable-next-line react/prop-types
-export default function MissingDialog({ open, handleClose }) {
-    const theme = useTheme()
+export default function MissingDialog({ open, handleClose, selectedRow }) {
+    const theme = useTheme();
+    console.log(selectedRow)
+
   return (
     <React.Fragment>
       <Dialog
@@ -25,13 +28,13 @@ export default function MissingDialog({ open, handleClose }) {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {`is ${'Let Google help apps determine location.'} urgent ?`}
+            {`is ${selectedRow?.productName} urgent ?`}
            
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button variant="text" color="info"  onClick={handleClose}>No</Button>
-          <Button variant="text" color="warning" onClick={handleClose} autoFocus>
+          <Button variant="text" color="info"  onClick={() => handleClose(false)}>No</Button>
+          <Button variant="text" color="warning" onClick={() => handleClose(true)} autoFocus>
             Yes
           </Button>
         </DialogActions>

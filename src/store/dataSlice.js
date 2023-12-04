@@ -10,8 +10,9 @@ export const fetchData = createAsyncThunk("data/fetchData", async () => {
 
 export const postData = createAsyncThunk(
   "data/postData",
-  async ({ endPoint, body }) => {
+  async ({ endPoint, body }, { dispatch }) => {
     const response = await axios.put(`${apiUrl}/${endPoint}`, body);
+    dispatch(fetchData());
     return response.data;
   }
 );
@@ -33,9 +34,12 @@ const dataSlice = createSlice({
         state.status = "failed";
         state.error = action.error.message;
       })
+      .addCase(postData.pending, (state) => {
+        state.status = "loading";
+      })
       .addCase(postData.fulfilled, (state, action) => {
         state.status = "succeeded";
-        state.items = action.payload;
+        // state.items = action.payload;
       });
   },
 });

@@ -1,7 +1,8 @@
 import Chip from "@mui/material/Chip";
 
-function StatusChips() {
-  return <Chip label="primary" color="info" />;
+// eslint-disable-next-line react/prop-types
+function StatusChips({status}) {
+  return <Chip label="primary" color={status} />;
 }
 
 export default StatusChips;

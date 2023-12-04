@@ -21,66 +21,68 @@ import MissingDialog from "./MissingDialog";
 
 import { fetchData, postData } from "../store/dataSlice";
 
-function createData(img, name, calories, fat, carbs, protein) {
-  return { img, name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData(apple, "Apple", "new", "$60.67 / 6+1LB", "0 x 6 *1LB", "0"),
-  createData(
-    avocado,
-    "avocado",
-    "newFirst",
-    "$60.67 / 6+1LB",
-    "15 x 6 *1LB",
-    "$9000.88"
-  ),
-  createData(
-    avocado,
-    "avocado",
-    "newFirst",
-    "$60.67 / 6+1LB",
-    "15 x 6 *1LB",
-    "$9000.88"
-  ),
-  createData(apple, "Apple", "new", "$60.67 / 6+1LB", "0 x 6 *1LB", "0"),
-  createData(
-    avocado,
-    "avocado",
-    "newFirst",
-    "$60.67 / 6+1LB",
-    "13 x 6 *1LB",
-    "$9000.88"
-  ),
-];
+const images = { apple, avocado };
 
 export default function Tables() {
   const dispatch = useDispatch();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [selectedRow, setSelectedRow] = React.useState({});
   const data = useSelector((state) => state.data);
 
-  React.useEffect(() => {
-    // Fetch data when the component mounts
-    // dispatch(fetchData());
-    dispatch(
-      postData({
-        endPoint: 1,
+  console.log(data);
 
-        body: {
-          firstName: "Fred",
-          lastName: "Flintstone",
-        },
-      })
-    );
+  React.useEffect(() => {
+    console.log("run");
+    dispatch(fetchData());
+    // dispatch(
+    //   postData({
+    //     endPoint: 1,
+
+    //     body: {
+    //       firstName: "Fred",
+    //       lastName: "Flintstone",
+    //     },
+    //   })
+    // );
   }, [dispatch]);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (row) => {
+    setSelectedRow(row);
     setOpen(true);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleClose = (response) => {
+    if (response === true) {
+      dispatch(
+        postData({
+          endPoint: selectedRow?.id,
+
+          body: {
+            ...selectedRow,
+            status: "warning",
+          },
+        })
+      );
+      setOpen(false);
+      setSelectedRow({});
+    } else if (response === false) {
+      dispatch(
+        postData({
+          endPoint: selectedRow?.id,
+
+          body: {
+            ...selectedRow,
+            status: "info",
+          },
+        })
+      );
+      setOpen(false);
+      setSelectedRow({});
+    } else {
+      setOpen(false);
+      setSelectedRow({});
+    }
   };
 
   return (
@@ -115,49 +117,94 @@ export default function Tables() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
+            {data?.status === "succeeded" &&
+              data?.items.map((row) => (
+                <TableRow
+                  key={row.id}
+                  sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                >
+                  <TableCell>
+                    <img
+                      src={images[row.image]}
+                      alt="apple"
+                      width="40px"
+                      height="40px"
+                    />
+                  </TableCell>
+                  <TableCell>{row.productName}</TableCell>
+                  <TableCell>{row.brand}</TableCell>
+                  <TableCell>{row.price}</TableCell>
+                  <TableCell>{row.quantity}</TableCell>
+                  <TableCell>{row.total}</TableCell>
+                  <TableCell>
+                    {row?.status && <StatusChips status={row?.status} />}
+                  </TableCell>
+                  <TableCell>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                      }}
+                    >
+                      <DoneIcon
+                        // color={row.status}
+                        sx={{
+                          color: theme.palette.grey[500],
+                          cursor: "pointer",
+                        }}
+                        onClick={() =>
+                          dispatch(
+                            postData({
+                              endPoint: row?.id,
+
+                              body: {
+                                ...row,
+                                status: "success",
+                              },
+                            })
+                          )
+                        }
+                      />
+
+                      <ClearIcon
+                        onClick={() => handleClickOpen(row)}
+                        sx={{
+                          color: theme.palette.grey[500],
+                          cursor: "pointer",
+                        }}
+                      />
+                      <Typography sx={{ color: theme.palette.grey[500] }}>
+                        Edit
+                      </Typography>
+                    </Box>
+                  </TableCell>
+                </TableRow>
+              ))}
+            {data?.status === "loading" && (
               <TableRow
-                key={row.name}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell>
-                  <img src={row.img} alt="apple" width="40px" height="40px" />
-                </TableCell>
-                <TableCell>{row.name}</TableCell>
-                <TableCell>{row.calories}</TableCell>
-                <TableCell>{row.fat}</TableCell>
-                <TableCell>{row.carbs}</TableCell>
-                <TableCell>{row.protein}</TableCell>
-                <TableCell>
-                  <StatusChips />
-                </TableCell>
-                <TableCell>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <DoneIcon
-                      sx={{ color: theme.palette.grey[500], cursor: "pointer" }}
-                    />
-                    <ClearIcon
-                      onClick={handleClickOpen}
-                      sx={{ color: theme.palette.grey[500], cursor: "pointer" }}
-                    />
-                    <Typography sx={{ color: theme.palette.grey[500] }}>
-                      {" "}
-                      Edit
-                    </Typography>
-                  </Box>
-                </TableCell>
+                <TableCell>Loading...</TableCell>
               </TableRow>
-            ))}
+            )}
+            {data?.status === "failed" && (
+              <TableRow
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              >
+                <TableCell>Error loading data</TableCell>
+              </TableRow>
+            )}
           </TableBody>
         </Table>
       </TableContainer>
-      {open && <MissingDialog open={open} handleClose={handleClose} />}
+      {open && (
+        <MissingDialog
+          open={open}
+          handleClose={handleClose}
+          selectedRow={selectedRow}
+        />
+      )}
     </Box>
   );
 }
