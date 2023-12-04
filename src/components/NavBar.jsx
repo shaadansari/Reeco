@@ -109,7 +109,7 @@ function NavBar() {
                 vertical: "top",
                 horizontal: "left",
               }}
-              badgeContent={4}
+              badgeContent={5}
               color="secondary"
             >
               <ShoppingCartIcon color="primary" />
