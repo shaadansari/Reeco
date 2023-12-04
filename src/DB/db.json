@@ -1,41 +1,54 @@
 {
   "orderData": [
     {
-      "firstName": "Fred",
-      "lastName": "Flintstone",
-      "id": 1
+      "brand": "new",
+      "id": 1,
+      "price": "$60.67 / 6+1LB",
+      "productName": "Fred",
+      "quantity": "0 x 6 *1LB",
+      "status": "",
+      "total": "0",
+      "image": "apple"
     },
     {
+      "brand": "popular",
       "id": 2,
-      "name": "Jane Smith",
-      "age": 40
+      "price": "$45.99 / 4+1LB",
+      "productName": "Alice",
+      "quantity": "2 x 4 *1LB",
+      "status": "pending",
+      "total": "91.98",
+      "image": "avocado"
     },
     {
-      "check": "update",
-      "id": 3
+      "brand": "organic",
+      "id": 3,
+      "price": "$35.50 / 3+1LB",
+      "productName": "Bob",
+      "quantity": "5 x 3 *1LB",
+      "status": "shipped",
+      "total": "177.50",
+      "image": "apple"
     },
     {
-      "id": 4
+      "brand": "premium",
+      "id": 4,
+      "price": "$75.25 / 5+1LB",
+      "productName": "Eve",
+      "quantity": "3 x 5 *1LB",
+      "status": "delivered",
+      "total": "225.75",
+      "image": "avocado"
     },
     {
-      "/1": "",
-      "id": 5
-    },
-    {
-      "/1": "",
-      "id": 6
-    },
-    {
-      "/1": "",
-      "id": 7
-    },
-    {
-      "/1": "",
-      "id": 8
-    },
-    {
-      "/1": "",
-      "id": 9
+      "brand": "discount",
+      "id": 5,
+      "price": "$30.00 / 2+1LB",
+      "productName": "Charlie",
+      "quantity": "1 x 2 *1LB",
+      "status": "cancelled",
+      "total": "30.00",
+      "image": "avocado"
     }
   ]
 }
