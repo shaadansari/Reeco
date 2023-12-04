@@ -12,12 +12,14 @@ import DoneIcon from "@mui/icons-material/Done";
 import ClearIcon from "@mui/icons-material/Clear";
 import Typography from "@mui/material/Typography";
 
-import {  useSelector } from 'react-redux';
+import { useDispatch, useSelector } from "react-redux";
 
 import apple from "../assets/apple.png";
 import avocado from "../assets/Avocado.jpg";
 import StatusChips from "./StatusChips";
 import MissingDialog from "./MissingDialog";
+
+import { fetchData, postData } from "../store/dataSlice";
 
 function createData(img, name, calories, fat, carbs, protein) {
   return { img, name, calories, fat, carbs, protein };
@@ -53,10 +55,25 @@ const rows = [
 ];
 
 export default function Tables() {
+  const dispatch = useDispatch();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const data = useSelector((state) => state.data);
 
+  React.useEffect(() => {
+    // Fetch data when the component mounts
+    // dispatch(fetchData());
+    dispatch(
+      postData({
+        endPoint: 1,
+
+        body: {
+          firstName: "Fred",
+          lastName: "Flintstone",
+        },
+      })
+    );
+  }, [dispatch]);
 
   const handleClickOpen = () => {
     setOpen(true);

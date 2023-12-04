@@ -1,40 +1,40 @@
-// dataSlice.js
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 
-const apiUrl = 'https://example.com/api/data';
+const apiUrl = "http://localhost:8000/orderData";
 
-// Fetch data asynchronously
-export const fetchData = createAsyncThunk('data/fetchData', async () => {
+export const fetchData = createAsyncThunk("data/fetchData", async () => {
   const response = await axios.get(apiUrl);
   return response.data;
 });
 
-// Post data asynchronously
-export const postData = createAsyncThunk('data/postData', async (newData) => {
-  const response = await axios.post(apiUrl, newData);
-  return response.data;
-});
+export const postData = createAsyncThunk(
+  "data/postData",
+  async ({ endPoint, body }) => {
+    const response = await axios.put(`${apiUrl}/${endPoint}`, body);
+    return response.data;
+  }
+);
 
 const dataSlice = createSlice({
-  name: 'data',
-  initialState: { items: [], status: 'idle', error: null },
+  name: "data",
+  initialState: { items: [], status: "idle", error: null },
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchData.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
       .addCase(fetchData.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.status = "succeeded";
         state.items = action.payload;
       })
       .addCase(fetchData.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status = "failed";
         state.error = action.error.message;
       })
       .addCase(postData.fulfilled, (state, action) => {
-        state.status = 'succeeded';
+        state.status = "succeeded";
         state.items = action.payload;
       });
   },
