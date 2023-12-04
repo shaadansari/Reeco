@@ -160,9 +160,9 @@ export default function Tables() {
                   </TableCell>
                   <TableCell>{row.productName}</TableCell>
                   <TableCell>{row.brand}</TableCell>
-                  <TableCell>{row.price}</TableCell>
-                  <TableCell>{row.quantity}</TableCell>
-                  <TableCell>{row.total}</TableCell>
+                  <TableCell>{`${row.price} / 6+1LB`}</TableCell>
+                  <TableCell>{`${row.quantity} x 6*1LB`}</TableCell>
+                  <TableCell>{row.price * row.quantity}</TableCell>
                   <TableCell>
                     {row?.status && <StatusChips status={row?.status} />}
                   </TableCell>
