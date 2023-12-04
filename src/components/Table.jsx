@@ -22,6 +22,7 @@ import MissingDialog from "./MissingDialog";
 import { fetchData, postData } from "../store/dataSlice";
 
 const images = { apple, avocado };
+const colors = { success: "#06662e", warning: "#b60523", info: "#c9430f" };
 
 export default function Tables() {
   const dispatch = useDispatch();
@@ -150,7 +151,10 @@ export default function Tables() {
                       <DoneIcon
                         // color={row.status}
                         sx={{
-                          color: theme.palette.grey[500],
+                          color:
+                            row.status === "success"
+                              ? colors[row.status]
+                              : theme.palette.grey[500],
                           cursor: "pointer",
                         }}
                         onClick={() =>
@@ -170,7 +174,10 @@ export default function Tables() {
                       <ClearIcon
                         onClick={() => handleClickOpen(row)}
                         sx={{
-                          color: theme.palette.grey[500],
+                          color:
+                            row.status === "info" || row.status === "warning"
+                              ? colors[row.status]
+                              : theme.palette.grey[500],
                           cursor: "pointer",
                         }}
                       />
