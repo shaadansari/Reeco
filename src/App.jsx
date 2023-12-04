@@ -1,8 +1,12 @@
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-import Layout from "./Layout";
-
 import { CssBaseline } from "@mui/material";
+
+import { Provider } from "react-redux";
+
+import store from "./store/store";
+
+import Layout from "./Layout";
 
 const lightTheme = createTheme({
   palette: {
@@ -20,19 +24,19 @@ const lightTheme = createTheme({
       main: "#06662e", // surface/surface-brand
       // dark: "#294E95", // deeptone/deepBlue  primary button
     },
-    success:{
+    success: {
       main: "#06662e",
     },
-    warning:{
+    warning: {
       main: "#b60523",
     },
-    info:{
+    info: {
       main: "#c9430f",
     },
-    
+
     grey: {
       100: "#f6f6f6",
-      300: "#DDDDDD", 
+      300: "#DDDDDD",
       500: "#a5a5a5", // surface/secondary-default
     },
     action: {
@@ -99,8 +103,10 @@ function App() {
   return (
     <>
       <ThemeProvider theme={lightTheme}>
-        <CssBaseline />
-        <Layout />
+        <Provider store={store}>
+          <CssBaseline />
+          <Layout />
+        </Provider>
       </ThemeProvider>
     </>
   );

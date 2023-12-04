@@ -12,6 +12,8 @@ import DoneIcon from "@mui/icons-material/Done";
 import ClearIcon from "@mui/icons-material/Clear";
 import Typography from "@mui/material/Typography";
 
+import {  useSelector } from 'react-redux';
+
 import apple from "../assets/apple.png";
 import avocado from "../assets/Avocado.jpg";
 import StatusChips from "./StatusChips";
@@ -53,6 +55,8 @@ const rows = [
 export default function Tables() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const data = useSelector((state) => state.data);
+
 
   const handleClickOpen = () => {
     setOpen(true);
