@@ -19,6 +19,7 @@ import apple from "../assets/apple.png";
 import avocado from "../assets/Avocado.jpg";
 import StatusChips from "./StatusChips";
 import MissingDialog from "./MissingDialog";
+import ProductDetailDialog from "./ProductDetailDialog";
 
 const images = { apple, avocado };
 const colors = { success: "#06662e", warning: "#b60523", info: "#c9430f" };
@@ -27,6 +28,8 @@ export default function Tables() {
   const dispatch = useDispatch();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [openDetail, setOpenDetail] = React.useState(false);
+
   const [selectedRow, setSelectedRow] = React.useState({});
   const data = useSelector((state) => state.data);
 
@@ -48,7 +51,7 @@ export default function Tables() {
 
           body: {
             ...selectedRow,
-            status: selectedRow?.status === "warning" ? "" : "warning" ,
+            status: selectedRow?.status === "warning" ? "" : "warning",
           },
         })
       );
@@ -69,6 +72,44 @@ export default function Tables() {
       setSelectedRow({});
     } else {
       setOpen(false);
+      setSelectedRow({});
+    }
+  };
+
+  const handleClickOpenDialog = (row) => {
+    setSelectedRow(row);
+    setOpenDetail(true);
+  };
+
+  const handleCloseDialog = (response) => {
+    if (response === true) {
+      dispatch(
+        postData({
+          endPoint: selectedRow?.id,
+
+          body: {
+            ...selectedRow,
+            status: selectedRow?.status === "warning" ? "" : "warning",
+          },
+        })
+      );
+      setOpen(false);
+      setSelectedRow({});
+    } else if (response === false) {
+      dispatch(
+        postData({
+          endPoint: selectedRow?.id,
+
+          body: {
+            ...selectedRow,
+            status: selectedRow?.status === "info" ? "" : "info",
+          },
+        })
+      );
+      setOpen(false);
+      setSelectedRow({});
+    } else {
+      setOpenDetail(false);
       setSelectedRow({});
     }
   };
@@ -148,7 +189,8 @@ export default function Tables() {
 
                               body: {
                                 ...row,
-                                status: row?.status === "success" ? "" : "success",
+                                status:
+                                  row?.status === "success" ? "" : "success",
                               },
                             })
                           )
@@ -165,7 +207,7 @@ export default function Tables() {
                           cursor: "pointer",
                         }}
                       />
-                      <Typography sx={{ color: theme.palette.grey[500] }}>
+                      <Typography onClick={() => handleClickOpenDialog(row)} sx={{ color: theme.palette.grey[500], cursor: "pointer", }}>
                         Edit
                       </Typography>
                     </Box>
@@ -193,6 +235,13 @@ export default function Tables() {
         <MissingDialog
           open={open}
           handleClose={handleClose}
+          selectedRow={selectedRow}
+        />
+      )}
+      {openDetail && (
+        <ProductDetailDialog
+          open={openDetail}
+          handleClose={handleCloseDialog}
           selectedRow={selectedRow}
         />
       )}

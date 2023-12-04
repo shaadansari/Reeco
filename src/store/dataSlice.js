@@ -38,7 +38,7 @@ const dataSlice = createSlice({
       .addCase(postData.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(postData.fulfilled, (state) => {
+      .addCase(postData.fulfilled, () => {
         // state.status = "succeeded";
       });
   },
