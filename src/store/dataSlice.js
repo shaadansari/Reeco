@@ -1,7 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const apiUrl = "http://localhost:8000/orderData";
+// const apiUrl = "http://localhost:8000/orderData";
+const apiUrl = "https://your-site-name.netlify.app/orderData";
+
 
 export const fetchData = createAsyncThunk("data/fetchData", async () => {
   const response = await axios.get(apiUrl);
