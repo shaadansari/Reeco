@@ -23,8 +23,12 @@ export default function ProductDetailDialog({
 }) {
   const theme = useTheme();
 
-  const Input1 = 9992;
-  const Input2 = 9856;
+  const [price, setPrice] = React.useState(selectedRow?.price);
+  const [quantity, setQuantity] = React.useState(selectedRow?.quantity);
+
+  const handleChange = (setState) => (event) => {
+    setState(event.target.value);
+  };
 
   return (
     <React.Fragment>
@@ -83,7 +87,8 @@ export default function ProductDetailDialog({
               >
                 <Typography>Price ($)</Typography>
                 <TextField
-                  defaultValue={selectedRow?.price}
+                  value={price}
+                  onChange={handleChange(setPrice)}
                   size="small"
                   sx={{ width: "6rem", marginRight: "-9.55rem" }}
                 />
@@ -101,7 +106,8 @@ export default function ProductDetailDialog({
               >
                 <Typography>Quantity</Typography>
                 <TextField
-                  defaultValue={Input2}
+                  value={quantity}
+                  onChange={handleChange(setQuantity)}
                   size="small"
                   sx={{ width: "6rem", marginRight: "-9.55rem" }}
                 />
@@ -119,11 +125,10 @@ export default function ProductDetailDialog({
               >
                 <Typography>Total</Typography>
                 <Typography
-                  value={9999.99}
                   size="small"
                   sx={{ width: "6rem", marginRight: "-10rem" }}
                 >
-                  $ {Input1 * Input2}
+                  $ {price * quantity}
                 </Typography>
               </Box>
             </div>
