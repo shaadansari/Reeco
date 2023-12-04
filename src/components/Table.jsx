@@ -48,7 +48,7 @@ export default function Tables() {
 
           body: {
             ...selectedRow,
-            status: "warning",
+            status: selectedRow?.status === "warning" ? "" : "warning" ,
           },
         })
       );
@@ -61,7 +61,7 @@ export default function Tables() {
 
           body: {
             ...selectedRow,
-            status: "info",
+            status: selectedRow?.status === "info" ? "" : "info",
           },
         })
       );
@@ -148,7 +148,7 @@ export default function Tables() {
 
                               body: {
                                 ...row,
-                                status: "success",
+                                status: row?.status === "success" ? "" : "success",
                               },
                             })
                           )
