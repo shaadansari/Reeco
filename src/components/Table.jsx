@@ -81,7 +81,7 @@ export default function Tables() {
     setOpenDetail(true);
   };
 
-  const handleCloseDialog = (response) => {
+  const handleCloseDialog = (response, price, quantity) => {
     if (response === true) {
       dispatch(
         postData({
@@ -89,24 +89,13 @@ export default function Tables() {
 
           body: {
             ...selectedRow,
-            status: selectedRow?.status === "warning" ? "" : "warning",
+            status:  "success",
+            price,
+            quantity,
           },
         })
       );
-      setOpen(false);
-      setSelectedRow({});
-    } else if (response === false) {
-      dispatch(
-        postData({
-          endPoint: selectedRow?.id,
-
-          body: {
-            ...selectedRow,
-            status: selectedRow?.status === "info" ? "" : "info",
-          },
-        })
-      );
-      setOpen(false);
+      setOpenDetail(false);
       setSelectedRow({});
     } else {
       setOpenDetail(false);
@@ -207,7 +196,13 @@ export default function Tables() {
                           cursor: "pointer",
                         }}
                       />
-                      <Typography onClick={() => handleClickOpenDialog(row)} sx={{ color: theme.palette.grey[500], cursor: "pointer", }}>
+                      <Typography
+                        onClick={() => handleClickOpenDialog(row)}
+                        sx={{
+                          color: theme.palette.grey[500],
+                          cursor: "pointer",
+                        }}
+                      >
                         Edit
                       </Typography>
                     </Box>

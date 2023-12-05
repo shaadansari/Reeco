@@ -145,7 +145,7 @@ export default function ProductDetailDialog({
           <Button
             variant="contained"
             color="secondary"
-            onClick={() => handleClose(true)}
+            onClick={() => handleClose(true, price, quantity)}
             autoFocus
           >
             send
