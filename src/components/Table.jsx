@@ -52,6 +52,10 @@ export default function Tables() {
           body: {
             ...selectedRow,
             status: selectedRow?.status === "warning" ? "" : "warning",
+            statusText:
+              selectedRow?.statusText === "Missing - Urgent"
+                ? ""
+                : "Missing - Urgent",
           },
         })
       );
@@ -65,6 +69,7 @@ export default function Tables() {
           body: {
             ...selectedRow,
             status: selectedRow?.status === "info" ? "" : "info",
+            statusText: selectedRow?.statusText === "Missing" ? "" : "Missing",
           },
         })
       );
@@ -82,6 +87,24 @@ export default function Tables() {
   };
 
   const handleCloseDialog = (response, price, quantity) => {
+    let handleText = "";
+
+    if (selectedRow?.price !== price && selectedRow?.quantity === quantity) {
+      handleText = "Price Updated";
+    } else if (
+      selectedRow?.quantity !== quantity &&
+      selectedRow?.price === price
+    ) {
+      handleText = "Quantity Updated";
+    } else if (
+      selectedRow?.quantity !== quantity &&
+      selectedRow?.price !== price
+    ) {
+      handleText = "Quantity and Price Updated";
+    } else {
+      handleText = "";
+    }
+
     if (response === true) {
       dispatch(
         postData({
@@ -89,7 +112,8 @@ export default function Tables() {
 
           body: {
             ...selectedRow,
-            status:  "success",
+            status: "success",
+            statusText: handleText,
             price,
             quantity,
           },
@@ -153,7 +177,12 @@ export default function Tables() {
                   <TableCell>{`${row.quantity} x 6*1LB`}</TableCell>
                   <TableCell>{row.price * row.quantity}</TableCell>
                   <TableCell>
-                    {row?.status && <StatusChips status={row?.status} />}
+                    {row?.status && (
+                      <StatusChips
+                        status={row?.status}
+                        statusText={row?.statusText}
+                      />
+                    )}
                   </TableCell>
                   <TableCell>
                     <Box
@@ -180,6 +209,10 @@ export default function Tables() {
                                 ...row,
                                 status:
                                   row?.status === "success" ? "" : "success",
+                                statusText:
+                                  row?.statusText === "Approved"
+                                    ? ""
+                                    : "Approved",
                               },
                             })
                           )
